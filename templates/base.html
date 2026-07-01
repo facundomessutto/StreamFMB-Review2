@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFMB: Review</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Reglas estrictas para apagar el blanco de Bootstrap */
+        body {
+            background-color: #0a0a0a !important; /* Fondo negro absoluto */
+            color: #e0e0e0 !important;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .navbar-minimal {
+            background-color: #0a0a0a !important;
+            border-bottom: 2px solid #00f0ff !important; /* Línea turquesa */
+        }
+        
+        .text-turquesa { color: #00f0ff !important; }
+        
+        .bg-panel { 
+            background-color: #141414 !important; /* Gris muy oscuro */
+            border: 1px solid #333333 !important; 
+        }
+        
+        * { border-radius: 0 !important; } /* Bordes cuadrados */
+        
+        /* MAGIA PARA LA TABLA: Obligar a que sea transparente y con texto blanco */
+        table, .table, .table th, .table td, .table tr {
+            background-color: transparent !important;
+            color: #e0e0e0 !important;
+            border-color: #333333 !important;
+            box-shadow: none !important;
+            --bs-table-bg: transparent !important;
+            --bs-table-color: #e0e0e0 !important;
+        }
+        
+        /* Botones estilo Cyberpunk */
+        .btn-turquesa {
+            background-color: #00f0ff !important;
+            color: #0a0a0a !important;
+            border: 1px solid #00f0ff !important;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .btn-turquesa:hover {
+            background-color: transparent !important;
+            color: #00f0ff !important;
+        }
+        
+        .btn-outline-turquesa {
+            background-color: transparent !important;
+            color: #00f0ff !important;
+            border: 1px solid #00f0ff !important;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .btn-outline-turquesa:hover {
+            background-color: #00f0ff !important;
+            color: #0a0a0a !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-minimal mb-5">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-turquesa text-uppercase" href="/">StreamFMB: Review</a>
+            
+            <div class="navbar-nav ms-auto align-items-center">
+                <a class="nav-link text-white text-uppercase me-3" href="/">Inicio</a>
+                <a class="nav-link text-white text-uppercase me-4" href="/contenidos/">Catálogo</a>
+                
+                {% if session.get('usuario_id') %}
+                    <span class="text-secondary me-3 text-uppercase" style="font-size: 0.85rem;">
+                        USER: <span class="text-turquesa fw-bold">{{ session.get('nombre_usuario') }}</span>
+                    </span>
+                    <a href="/logout" class="btn btn-outline-secondary btn-sm rounded-0 text-uppercase fw-bold">Salir</a>
+                {% else %}
+                    <a href="/login" class="btn btn-outline-turquesa btn-sm rounded-0 text-uppercase me-2">Ingresar</a>
+                    <a href="/registro" class="btn btn-turquesa btn-sm rounded-0 text-uppercase" style="color: #0a0a0a !important;">Crear Cuenta</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container pb-5">
+        {% block contenido %}{% endblock %}
+    </div>
+</body>
+</html>

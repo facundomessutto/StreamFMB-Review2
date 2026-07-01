@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="bg-panel p-5 mb-5 border-start border-5" style="border-left-color: #00f0ff !important;">
+    <div class="d-flex justify-content-between align-items-end">
+        <div>
+            <h6 class="text-turquesa text-uppercase fw-bold mb-2 tracking-wide">{{ contenido.genero }} • {{ contenido.anio_estreno }}</h6>
+            <h1 class="display-3 fw-bold text-white mb-0 text-uppercase">{{ contenido.titulo }}</h1>
+            <span class="badge border border-secondary text-secondary mt-3">{{ contenido.tipo }}</span>
+        </div>
+        <div class="text-end">
+            <p class="text-uppercase text-secondary mb-1" style="font-size: 0.8rem; letter-spacing: 1px;">Puntuación Global</p>
+            <h2 class="m-0 text-turquesa fw-bold display-5">
+                {{ promedio if promedio > 0 else 'S/N' }} <span class="text-secondary fs-4">/ 5</span>
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom" style="border-color: #333333 !important;">
+    <h4 class="text-uppercase fw-light text-white m-0">Comunidad</h4>
+    <a href="/resenas/nueva?pelicula={{ contenido.id }}" class="btn btn-outline-turquesa">+ Añadir Reseña</a>
+</div>
+
+{% if resenas %}
+    <div class="row g-4">
+        {% for r in resenas %}
+        <div class="col-md-6">
+            <div class="p-4 bg-panel h-100">
+                <div class="d-flex justify-content-between mb-3 border-bottom pb-2" style="border-color: #333333 !important;">
+                    <span class="text-secondary fw-bold text-uppercase" style="font-size: 0.85rem;">User #{{ r.usuario_id }}</span>
+                    <span class="text-turquesa fs-5">{% for _ in range(r.calificacion) %}★{% endfor %}</span>
+                </div>
+                
+                {% if r.censurada %}
+                    <p class="mb-0 text-danger" style="font-style: italic; font-weight: bold; font-size: 0.9rem;">
+                        [Este comentario ha sido ocultado por un Moderador de StreamFMB]
+                    </p>
+                {% else %}
+                    <p class="mb-0 text-white" style="font-style: italic;">"{{ r.comentario }}"</p>
+                {% endif %}
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="p-5 border text-center text-secondary bg-panel" style="border-color: #333333 !important;">
+        <p class="mb-0 text-uppercase letter-spacing-wide">No existen registros en la base de datos para esta obra.</p>
+    </div>
+{% endif %}
+{% endblock %}

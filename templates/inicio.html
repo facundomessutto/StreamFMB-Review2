@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="bg-panel p-5 mb-5 text-center">
+    <h1 class="display-4 fw-light mb-3 text-white">BIENVENIDO A <br><span class="text-turquesa fw-bold">STREAMFMB: REVIEW</span></h1>
+    <p class="lead text-secondary mb-5">Descubre, opina y decide. Tu catálogo disponible en StreamFMB.</p>
+    
+    <div class="row justify-content-center g-4 mb-5">
+        <div class="col-md-4">
+            <div class="p-4 border text-center bg-panel" style="border-color: #333333 !important;">
+                <h6 class="text-uppercase text-secondary mb-3">Obras en Catálogo</h6>
+                <h2 class="display-4 text-white m-0 fw-bold">{{ total_obras }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 border text-center bg-panel" style="border-color: #00f0ff !important;">
+                <h6 class="text-uppercase text-turquesa mb-3">Reseñas Globales</h6>
+                <h2 class="display-4 text-white m-0 fw-bold">{{ total_resenas }}</h2>
+            </div>
+        </div>
+    </div>
+    <a href="/contenidos/" class="btn btn-outline-turquesa px-5 py-3">Explorar Catálogo</a>
+</div>
+{% endblock %}

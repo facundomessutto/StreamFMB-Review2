@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="d-flex justify-content-between align-items-end border-bottom pb-3 mb-4" style="border-color: #333333 !important;">
+    <h3 class="text-uppercase fw-light text-white m-0">Catálogo <span class="text-turquesa fw-bold">Disponible</span></h3>
+</div>
+<form method="GET" action="/contenidos/" class="d-flex mb-4">
+    <input type="text" name="q" class="form-control me-2 text-white" style="background-color: #1a1a1a; border-color: #333;" placeholder="Buscar película o serie..." value="{{ query }}">
+    <button type="submit" class="btn btn-turquesa text-uppercase fw-bold">Buscar</button>
+    {% if query %}
+        <a href="/contenidos/" class="btn btn-outline-secondary ms-2 text-uppercase fw-bold">Limpiar</a>
+    {% endif %}
+</form>
+<div class="table-responsive bg-panel p-4">
+    <table class="table mb-0">
+        <thead>
+            <tr class="text-uppercase text-secondary">
+                <th class="border-0">ID</th>
+                <th class="border-0">Obra</th>
+                <th class="border-0">Formato</th>
+                <th class="border-0">Género</th>
+                <th class="border-0">Estreno</th>
+                <th class="border-0 text-end">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in contenidos %}
+            <tr>
+                <td class="text-secondary align-middle">{{ c.id }}</td>
+                <td class="fw-bold text-white fs-5 align-middle">{{ c.titulo }}</td>
+                <td class="align-middle"><span class="badge border border-secondary text-secondary">{{ c.tipo }}</span></td>
+                <td class="align-middle text-light">{{ c.genero }}</td>
+                <td class="align-middle text-light">{{ c.anio_estreno }}</td>
+                <td class="text-end align-middle">
+                    <a href="/contenidos/{{ c.id }}" class="btn btn-turquesa btn-sm px-3 py-2">Ver Ficha</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

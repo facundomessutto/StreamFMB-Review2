@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="bg-panel p-4 border-start" style="border-left-color: #00f0ff !important; border-left-width: 5px !important;">
+            <h4 class="text-uppercase fw-light text-white mb-4">Ingresar a <span class="fw-bold" style="color: #00f0ff;">StreamFMB</span></h4>
+            
+            {% if error %}
+            <div class="alert alert-danger rounded-0 border-0 mb-3" style="background-color: #3a0000; color: #ff6b6b; font-weight: bold;">
+                {{ error }}
+            </div>
+            {% endif %}
+            
+            <form method="POST" action="/login">
+                <div class="mb-3">
+                    <label class="form-label text-secondary text-uppercase fw-bold" style="font-size: 0.8rem;">Usuario</label>
+                    <input type="text" name="username" class="form-control text-white" required placeholder="Tu nombre de usuario" style="background-color: #1a1a1a; border-color: #333;">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-secondary text-uppercase fw-bold" style="font-size: 0.8rem;">Contraseña</label>
+                    <input type="password" name="password" class="form-control text-white" required placeholder="••••" style="background-color: #1a1a1a; border-color: #333;">
+                </div>
+                <button type="submit" class="btn text-dark fw-bold text-uppercase w-100 mb-3" style="background-color: #00f0ff; border: none;">Iniciar Sesión</button>
+                <div class="text-center">
+                    <a href="/registro" class="text-secondary text-decoration-none" style="font-size: 0.85rem;">¿No tienes cuenta? Regístrate aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

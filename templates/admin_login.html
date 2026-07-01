@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="bg-panel p-5 border-start" style="border-left-color: #ff003c !important; border-left-width: 5px !important;">
+            <h2 class="text-uppercase fw-light text-white mb-4">Portal <span class="fw-bold" style="color: #ff003c;">Moderador</span></h2>
+            
+            {% if error %}
+            <div class="alert alert-danger rounded-0 border-0" style="background-color: #3a0000; color: #ff6b6b;">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label text-secondary text-uppercase fw-bold" style="font-size: 0.8rem;">Usuario ID</label>
+                    <!-- Aquí agregamos style para forzar el fondo oscuro -->
+                    <input type="text" name="usuario" class="form-control text-white" required style="background-color: #1a1a1a; border-color: #333;">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-secondary text-uppercase fw-bold" style="font-size: 0.8rem;">Clave de Acceso</label>
+                    <!-- Y aquí también -->
+                    <input type="password" name="password" class="form-control text-white" required style="background-color: #1a1a1a; border-color: #333;">
+                </div>
+                <button type="submit" class="btn text-white fw-bold text-uppercase w-100" style="background-color: #ff003c; border: none;">Autenticar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

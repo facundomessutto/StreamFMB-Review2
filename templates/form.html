@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0 mt-4">
+            <div class="card-header bg-warning text-dark py-3">
+                <h4 class="mb-0 fw-bold">Escribir una Reseña</h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="/resenas/nueva" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">¿Qué película o serie vas a calificar?</label>
+                        <select name="contenido_id" class="form-select" required>
+                            <option value="">Selecciona una opción...</option>
+                            {% for c in contenidos %}
+                                <option value="{{ c.id }}">{{ c.titulo }} ({{ c.anio_estreno }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Calificación</label>
+                        <select name="calificacion" class="form-select text-warning fw-bold" required>
+                            <option value="5">★★★★★ - ¡Obra Maestra!</option>
+                            <option value="4">★★★★☆ - Muy buena</option>
+                            <option value="3">★★★☆☆ - Regular / Pasable</option>
+                            <option value="2">★★☆☆☆ - Mala</option>
+                            <option value="1">★☆☆☆☆ - Pésima</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Tu comentario</label>
+                        <textarea name="comentario" class="form-control" rows="4" placeholder="¿Qué te pareció? Escribe tu opinión aquí..." required></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-dark btn-lg">Publicar Reseña</button>
+                        <a href="/contenidos/" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

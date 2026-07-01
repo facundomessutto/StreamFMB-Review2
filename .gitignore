@@ -1,0 +1,16 @@
+# Entornos virtuales (¡Muy pesado, nunca se sube!)
+venv/
+env/
+
+# Caché de Python
+__pycache__/
+*.pyc
+
+# Base de datos local (El código la creará sola en el PC del profesor)
+*.db
+*.sqlite3
+streamfmb.db
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db

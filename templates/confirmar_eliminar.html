@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <h3 class="text-danger mb-4">Confirmar Eliminación</h3>
+        <p class="text-white">¿Estás completamente seguro de que deseas eliminar la obra <strong>"{{ contenido.titulo }}"</strong>?</p>
+        <p class="text-muted small">Esta acción también borrará todas sus reseñas y no se puede deshacer.</p>
+        
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button type="submit" class="btn btn-danger rounded-0 text-uppercase fw-bold">Sí, Eliminar Definitivamente</button>
+                <a href="/admin/dashboard" class="btn btn-outline-secondary rounded-0 text-uppercase fw-bold">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
