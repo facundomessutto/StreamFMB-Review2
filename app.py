@@ -2,10 +2,15 @@ from flask import Flask, jsonify, render_template, abort, request, redirect, ses
 import sqlite3
 from datetime import datetime
 import secrets
+import os
 
 app = Flask(__name__)
 app.secret_key = 'streamfmb_clave_secreta_super_segura'
-DATABASE = 'streamfmb.db'
+
+# --- LA MAGIA PARA QUE FUNCIONE EN PYTHONANYWHERE ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.path.join(BASE_DIR, 'streamfmb.db')
+# ----------------------------------------------------
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
