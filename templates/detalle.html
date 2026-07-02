@@ -47,5 +47,28 @@
     <div class="p-5 border text-center text-secondary bg-panel" style="border-color: #333333 !important;">
         <p class="mb-0 text-uppercase letter-spacing-wide">No existen registros en la base de datos para esta obra.</p>
     </div>
+<div class="mt-5">
+    <h4 class="text-uppercase text-white mb-4">Reseñas de los Usuarios <span class="text-warning">({{ promedio }} ⭐)</span></h4>
+    
+    {% if resenas %}
+        {% for resena in resenas %}
+        <div class="bg-panel p-3 mb-3" style="background-color: #1a1a1a; border-left: 4px solid #00f0ff;">
+            <div class="d-flex justify-content-between">
+                <strong class="text-info text-uppercase">{{ resena.nombre_usuario }}</strong>
+                <span class="text-warning fw-bold">{{ resena.calificacion }} / 5 ⭐</span>
+            </div>
+            <p class="text-light mt-2 mb-0">{{ resena.comentario }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-dark" style="background-color: #1a1a1a; border: 1px dashed #333;">
+            <p class="text-muted text-center mb-0">Aún no hay reseñas para esta obra. ¡Anímate a dejar la primera!</p>
+        </div>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a href="/resenas/nueva" class="btn text-dark fw-bold text-uppercase" style="background-color: #00f0ff;">Añadir Reseña</a>
+    </div>
+</div>
 {% endif %}
 {% endblock %}

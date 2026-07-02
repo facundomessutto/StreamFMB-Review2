@@ -39,9 +39,15 @@
                         <button type="submit" class="btn btn-dark btn-lg">Publicar Reseña</button>
                         <a href="/contenidos/" class="btn btn-outline-secondary">Cancelar</a>
                     </div>
+                    
                 </form>
             </div>
         </div>
     </div>
+    <select name="contenido_id" class="form-select text-white" style="background-color: #1a1a1a;">
+    {% for contenido in contenidos %}
+        <option value="{{ contenido.id }}">{{ contenido.titulo }}</option>
+    {% endfor %}
+</select>
 </div>
 {% endblock %}
