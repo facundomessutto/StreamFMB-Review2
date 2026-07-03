@@ -185,7 +185,7 @@ def detalle_contenido(id):
     resenas_obra = db.execute('''
         SELECT r.*, u.nombre_usuario 
         FROM resenas r JOIN usuarios u ON r.usuario_id = u.id
-        WHERE r.contenido_id = ? AND r.censurada = 0
+        WHERE r.contenido_id = ? 
     ''', (id,)).fetchall()
 
     
