@@ -61,6 +61,7 @@ def init_db():
         cursor.execute("INSERT INTO contenidos (titulo, tipo, genero, anio_estreno) VALUES ('Breaking Bad', 'Serie', 'Drama', 2008)")
         cursor.execute("INSERT INTO resenas (calificacion, comentario, usuario_id, contenido_id, censurada) VALUES (5, 'Una obra maestra absoluta.', 1, 1, 0)")
         
+    
     conn.commit()
     conn.close()
 
@@ -180,12 +181,13 @@ def detalle_contenido(id):
     contenido = db.execute("SELECT * FROM contenidos WHERE id = ?", (id,)).fetchone()
     if not contenido: 
         abort(404)
-        
+    
     resenas_obra = db.execute('''
         SELECT r.*, u.nombre_usuario 
         FROM resenas r JOIN usuarios u ON r.usuario_id = u.id
-        WHERE r.contenido_id = ?
+        WHERE r.contenido_id = ? AND r.censurada = 0
     ''', (id,)).fetchall()
+
     
     promedio = sum(r['calificacion'] for r in resenas_obra) / len(resenas_obra) if resenas_obra else 0
     db.close()
@@ -363,9 +365,28 @@ def admin_eliminar_contenido(id):
         db.commit()
         db.close()
         return redirect('/admin/dashboard')
+    
         
     db.close()
     return render_template('confirmar_eliminar.html', contenido=contenido)
+
+@app.route('/admin/censurar_resena/<int:id>', methods=['GET', 'POST'])
+def admin_censurar_resena(id):
+    if not session.get('admin_logged_in'): 
+        return redirect('/admin/login')
+    
+    db = get_db()
+    # Buscamos la reseña para saber si ya está censurada o no
+    resena = db.execute("SELECT censurada FROM resenas WHERE id = ?", (id,)).fetchone()
+    
+    if resena:
+        # Si es 0 (visible) la pasa a 1 (censurada), y viceversa
+        nuevo_estado = 1 if resena['censurada'] == 0 else 0
+        db.execute("UPDATE resenas SET censurada = ? WHERE id = ?", (nuevo_estado, id))
+        db.commit()
+        
+    db.close()
+    return redirect('/admin/dashboard')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
