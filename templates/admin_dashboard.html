@@ -1,63 +1,65 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom" style="border-color: #333 !important;">
-    <div>
-        <h2 class="text-white text-uppercase m-0">Terminal <span style="color: #ff003c;">Administrativa</span></h2>
-        <span class="text-secondary" style="font-size: 0.85rem;">Conectado como Moderador</span>
-    </div>
-    <a href="/admin/logout" class="btn btn-outline-danger rounded-0 fw-bold text-uppercase border-1">Cerrar Sesión</a>
-</div>
-
-<div class="row g-4">
-    <div class="col-md-7">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="text-uppercase text-white fw-light m-0">Gestión de <span class="fw-bold" style="color: #ff003c;">Catálogo</span></h5>
-            <a href="/admin/agregar_contenido" class="btn btn-sm text-white fw-bold text-uppercase" style="background-color: #ff003c;">+ Añadir Obra</a>
+<div class="table-responsive"> 
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom" style="border-color: #333 !important;">
+        <div>
+            <h2 class="text-white text-uppercase m-0">Terminal <span style="color: #ff003c;">Administrativa</span></h2>
+            <span class="text-secondary" style="font-size: 0.85rem;">Conectado como Moderador</span>
         </div>
-        
-        <div class="table-responsive bg-panel p-3">
-            <table class="table mb-0 align-middle">
-                <thead>
-                    <tr class="text-secondary text-uppercase" style="font-size: 0.8rem;">
-                        <th class="border-0">ID</th>
-                        <th class="border-0">Obra</th>
-                        <th class="border-0 text-end">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for c in contenidos %}
-                    <tr>
-                        <td class="text-secondary">{{ c.id }}</td>
-                        <td class="text-white fw-bold">{{ c.titulo }}</td>
-                        <td class="text-end text-nowrap">
-                            <a href="/admin/editar_contenido/{{ c.id }}" class="btn btn-sm btn-outline-warning rounded-0 border-1 me-1">Editar</a>
-                            <a href="/admin/eliminar_contenido/{{ c.id }}" class="btn btn-sm btn-danger rounded-0" onclick="return confirm('¿Eliminar esta obra del catálogo?');">Borrar</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <a href="/admin/logout" class="btn btn-outline-danger rounded-0 fw-bold text-uppercase border-1">Cerrar Sesión</a>
     </div>
 
-    <div class="col-md-5">
-        <h5 class="text-uppercase text-white fw-light mb-3">Moderación de <span class="fw-bold" style="color: #ff003c;">Reseñas</span></h5>
-        <div class="bg-panel p-3">
-            {% for r in resenas %}
-            <div class="border-bottom pb-2 mb-2" style="border-color: #333 !important;">
-                <div class="d-flex justify-content-between">
-                    <span class="text-secondary fw-bold" style="font-size: 0.8rem;">Obra ID: {{ r.contenido_id }} | User: {{ r.usuario_id }}</span>
-                    {% if r.censurada %}
-                        <a href="/admin/censurar_resena/{{ r.id }}" class="badge bg-success text-decoration-none rounded-0">Restaurar</a>
-                    {% else %}
-                        <a href="/admin/censurar_resena/{{ r.id }}" class="badge bg-warning text-dark text-decoration-none rounded-0">Censurar</a>
-                    {% endif %}
-                </div>
-                <p class="text-white m-0 mt-1" style="font-size: 0.9rem;">
-                    {% if r.censurada %} <del class="text-danger">{{ r.comentario }}</del> {% else %} "{{ r.comentario }}" {% endif %}
-                </p>
+    <div class="row g-4">
+        <div class="col-md-7">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="text-uppercase text-white fw-light m-0">Gestión de <span class="fw-bold" style="color: #ff003c;">Catálogo</span></h5>
+                <a href="/admin/agregar_contenido" class="btn btn-sm text-white fw-bold text-uppercase" style="background-color: #ff003c;">+ Añadir Obra</a>
             </div>
-            {% endfor %}
+            
+            <div class="table-responsive bg-panel p-3">
+                <table class="table mb-0 align-middle">
+                    <thead>
+                        <tr class="text-secondary text-uppercase" style="font-size: 0.8rem;">
+                            <th class="border-0">ID</th>
+                            <th class="border-0">Obra</th>
+                            <th class="border-0 text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in contenidos %}
+                        <tr>
+                            <td class="text-secondary">{{ c.id }}</td>
+                            <td class="text-white fw-bold">{{ c.titulo }}</td>
+                            <td class="text-end text-nowrap">
+                                <a href="/admin/editar_contenido/{{ c.id }}" class="btn btn-sm btn-outline-warning rounded-0 border-1 me-1">Editar</a>
+                                <a href="/admin/eliminar_contenido/{{ c.id }}" class="btn btn-sm btn-danger rounded-0" onclick="return confirm('¿Eliminar esta obra del catálogo?');">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <h5 class="text-uppercase text-white fw-light mb-3">Moderación de <span class="fw-bold" style="color: #ff003c;">Reseñas</span></h5>
+            <div class="bg-panel p-3">
+                {% for r in resenas %}
+                <div class="border-bottom pb-2 mb-2" style="border-color: #333 !important;">
+                    <div class="d-flex justify-content-between">
+                        <span class="text-secondary fw-bold" style="font-size: 0.8rem;">Obra ID: {{ r.contenido_id }} | User: {{ r.usuario_id }}</span>
+                        {% if r.censurada %}
+                            <a href="/admin/censurar_resena/{{ r.id }}" class="badge bg-success text-decoration-none rounded-0">Restaurar</a>
+                        {% else %}
+                            <a href="/admin/censurar_resena/{{ r.id }}" class="badge bg-warning text-dark text-decoration-none rounded-0">Censurar</a>
+                        {% endif %}
+                    </div>
+                    <p class="text-white m-0 mt-1" style="font-size: 0.9rem;">
+                        {% if r.censurada %} <del class="text-danger">{{ r.comentario }}</del> {% else %} "{{ r.comentario }}" {% endif %}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
