@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<div class="bg-panel p-5 mb-5 border-start border-5" style="border-left-color: #00f0ff !important;">
-    <div class="d-flex justify-content-between align-items-end">
-        <div>
-            <h6 class="text-turquesa text-uppercase fw-bold mb-2 tracking-wide">{{ contenido.genero }} • {{ contenido.anio_estreno }}</h6>
-            <h1 class="display-3 fw-bold text-white mb-0 text-uppercase">{{ contenido.titulo }}</h1>
-            <span class="badge border border-secondary text-secondary mt-3">{{ contenido.tipo }}</span>
+<div class="bg-panel p-5 mb-5 border-start border-5" style="border-left-color: #00f0ff !important; background-color: #111;">
+    <div class="row align-items-center">
+        
+        <div class="col-md-3 col-sm-4 mb-4 mb-md-0 text-center">
+            <img src="/static/portadas/{{ contenido.id }}.jpg" 
+                 alt="Portada de {{ contenido.titulo }}" 
+                 class="img-fluid rounded shadow" 
+                 style="max-height: 280px; object-fit: cover; border: 2px solid #333;"
+                 onerror="this.onerror=null; this.src='https://placehold.co/300x450/1a1a1a/00f0ff?text=Sin+Portada';">
         </div>
-        <div class="text-end">
-            <p class="text-uppercase text-secondary mb-1" style="font-size: 0.8rem; letter-spacing: 1px;">Puntuación Global</p>
-            <h2 class="m-0 text-turquesa fw-bold display-5">
-                {{ promedio if promedio > 0 else 'S/N' }} <span class="text-secondary fs-4">/ 5</span>
-            </h2>
+        
+        <div class="col-md-9 col-sm-8">
+            <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
+                <div>
+                    <h6 class="text-turquesa text-uppercase fw-bold mb-2 tracking-wide">{{ contenido.genero }} • {{ contenido.anio_estreno }}</h6>
+                    <h1 class="display-4 fw-bold text-white mb-0 text-uppercase">{{ contenido.titulo }}</h1>
+                    <span class="badge border border-secondary text-secondary mt-3">{{ contenido.tipo }}</span>
+                </div>
+                <div class="text-md-end mt-4 mt-md-0">
+                    <p class="text-uppercase text-secondary mb-1" style="font-size: 0.8rem; letter-spacing: 1px;">Puntuación Global</p>
+                    <h2 class="m-0 text-turquesa fw-bold display-5">
+                        {{ promedio if promedio > 0 else 'S/N' }} <span class="text-secondary fs-4">/ 5</span>
+                    </h2>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 
